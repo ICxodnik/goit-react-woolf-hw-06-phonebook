@@ -2,10 +2,11 @@ import React from 'react';
 import css from 'components/Filter/index.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'store/phoneBook.slice.ts';
+import { getFilter } from 'store/selectors';
 
 export const Filter = props => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.phoneBook.filter);
+  const filter = useSelector(getFilter);
 
   const handleFilter = value => {
     dispatch(setFilter(value));

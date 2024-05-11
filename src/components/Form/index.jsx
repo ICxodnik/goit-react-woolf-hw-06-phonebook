@@ -3,9 +3,10 @@ import { nanoid } from 'nanoid';
 import css from 'components/Form/index.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact, setFilter } from 'store/phoneBook.slice.ts';
+import { getContacts } from 'store/selectors';
 
 export const Form = props => {
-  const contacts = useSelector(state => state.phoneBook.contacts);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
