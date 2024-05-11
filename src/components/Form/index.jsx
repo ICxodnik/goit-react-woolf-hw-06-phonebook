@@ -1,8 +1,13 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import css from 'components/Form/index.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact, setFilter } from 'store/phoneBook.slice.ts';
 
 export const Form = props => {
+  const contacts = useSelector(state => state.phoneBook.contacts);
+  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -11,9 +16,17 @@ export const Form = props => {
       number: form.elements.number.value,
       id: nanoid(),
     };
-    let hasReset = props.onSubmit(user);
-    hasReset && form.reset();
+
+    if (contacts.some(contact => contact.name.toLowerCase() === user.name.toLowerCase())) {
+      alert(`${user.name} is already in contacts.`);
+      return;
+    }
+
+    dispatch(addContact(user));
+    dispatch(setFilter(''));
+    form.reset();
   };
+  
   return (
     <form className={css.form} onSubmit={handleSubmit}>
       <label className={css.input}>
