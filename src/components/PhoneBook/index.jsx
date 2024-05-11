@@ -4,18 +4,12 @@ import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 import { Form } from 'components/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, deleteContact, setFilter } from 'store/phoneBook.slice.ts'
-
-function getSavedContacts() {
-  const string = localStorage.getItem('contacts');
-  const contacts = string ? JSON.parse(string) : [];
-  return contacts;
-}
+import { addContact, deleteContact, setFilter } from 'store/phoneBook.slice.ts';
 
 export const PhoneBook = () => {
-  const contacts = useSelector((state) => state.phoneBook.contacts)
-  const filter = useSelector((state) => state.phoneBook.filter)
-  const dispatch = useDispatch()
+  const contacts = useSelector(state => state.phoneBook.contacts);
+  const filter = useSelector(state => state.phoneBook.filter);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -27,17 +21,17 @@ export const PhoneBook = () => {
       return false;
     }
 
-    dispatch(addContact(user))
-    dispatch(setFilter(''))
+    dispatch(addContact(user));
+    dispatch(setFilter(''));
     return true;
   };
 
   const handleFilter = value => {
-    dispatch(setFilter(value))
+    dispatch(setFilter(value));
   };
 
   const handleDelete = id => {
-    dispatch(deleteContact(id))
+    dispatch(deleteContact(id));
   };
 
   function getFilteredData() {
