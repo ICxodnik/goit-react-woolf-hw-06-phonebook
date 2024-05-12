@@ -4,20 +4,16 @@ import phoneBookReducer from './phoneBook.slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-const reducers = combineReducers({
-  phoneBook: phoneBookReducer,
-});
-
 const persistConfig = {
   key: 'phoneBook',
-  whitelist: ['phoneBook'],
+  whitelist: ['contacts'],
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, phoneBookReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer
+  reducer: persistedReducer,
 });
 
 export const persistor = persistStore(store);
