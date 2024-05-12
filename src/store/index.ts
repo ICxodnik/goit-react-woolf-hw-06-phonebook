@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import phoneBookReducer from './phoneBook.slice';
 
 import { persistStore, persistReducer } from 'redux-persist';
